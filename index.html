@@ -3,34 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation | Yuuki & Narumi</title>
+    <title>Wedding Invitation | Yuuki & Narimi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Parisienne&display=swap" rel="stylesheet">
     <style>
-        /* 画像パスの管理：指定された5枚のみPC版ディレクトリ(image/PC/)を用意 */
-        :root {
-            --img-150: url('image/20240202UK-150.jpg');
-            --img-101: url('image/20240202UK-101.jpg');
-            --img-0006: url('image/OHW18550006.jpg');
-            --img-0033: url('image/OHW18550033.jpg');
-            --img-124: url('image/20240202UK-124.jpg');
-            /* これ以外は常にimage直下（PC版なし） */
-            --img-0014: url('image/OHW18550014.jpg');
-            --img-uk1: url('image/20240202UK-1.jpg');
-            --img-0037: url('image/OHW18550037.jpg');
-        }
-
-        /* PC幅（768px以上）になった時だけ、指定の5枚の参照先を切り替え */
-        @media (min-width: 768px) {
-            :root {
-                --img-150: url('image/PC/20240202UK-150.jpg');
-                --img-0006: url('image/PC/OHW18550006.jpg');
-                --img-0033: url('image/PC/OHW18550033.jpg');
-                --img-124: url('image/PC/20240202UK-124.jpg');
-                --img-101: url('image/PC/20240202UK-101.jpg');
-            }
-        }
-
         html {
             scroll-snap-type: y proximity;
         }
@@ -55,13 +31,7 @@
             opacity: 0;
             transition: opacity 2s ease-in-out;
             background-size: cover;
-            background-position: center;
-        }
-        @media (max-width: 768px) {
-            .hero-slide {
-                /* スマホで見切れにくいよう上寄りに調整 */
-                background-position: center 20%;
-            }
+            background-position: center 20%; /* スマホで見切れにくいよう上寄りに固定 */
         }
         .hero-slide.active {
             opacity: 1;
@@ -141,10 +111,10 @@
     </nav>
 
     <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden bg-black">
-        <div class="hero-slide active" style="background-image: var(--img-150);"></div>
-        <div class="hero-slide" style="background-image: var(--img-101);"></div>
-        <div class="hero-slide" style="background-image: var(--img-0014);"></div>
-        <div class="hero-slide" style="background-image: var(--img-124);"></div>
+        <div class="hero-slide active" style="background-image: url('image/OHW18550124.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('image/OHW18550006.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('image/OHW18550033.jpg');"></div>
+        <div class="hero-slide" style="background-image: url('image/20240202UK-150.jpg');"></div>
 
         <div class="absolute inset-0 hero-overlay"></div>
         
@@ -299,23 +269,23 @@
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                 <div class="gallery-item md:col-span-2 h-[250px] md:h-[300px]">
-                    <div class="gallery-img" style="background-image: var(--img-uk1); background-size: cover; background-position: center; height: 100%; border-radius: 4px;"></div>
+                    <img src="image/20240202UK-101.jpg" alt="Gallery" class="gallery-img">
                 </div>
 
                 <div class="gallery-item md:row-span-2 h-[400px] md:h-auto">
-                    <div class="gallery-img" style="background-image: var(--img-0006); background-size: cover; background-position: center; height: 100%; border-radius: 4px;"></div>
+                    <img src="image/OHW18550037.jpg" alt="Gallery" class="gallery-img">
                 </div>
 
                 <div class="gallery-item h-[250px] md:h-[300px]">
-                    <div class="gallery-img" style="background-image: var(--img-0033); background-size: cover; background-position: center; height: 100%; border-radius: 4px;"></div>
+                    <img src="image/OHW18550014.jpg" alt="Gallery" class="gallery-img">
                 </div>
 
                 <div class="gallery-item md:row-span-2 h-[400px] md:h-auto">
-                    <div class="gallery-img" style="background-image: var(--img-124); background-size: cover; background-position: center; height: 100%; border-radius: 4px;"></div>
+                    <img src="image/20240202UK-124.jpg" alt="Gallery" class="gallery-img">
                 </div>
 
                 <div class="gallery-item h-[250px] md:h-[300px]">
-                    <div class="gallery-img" style="background-image: var(--img-0037); background-size: cover; background-position: center; height: 100%; border-radius: 4px;"></div>
+                    <img src="image/20240202UK-1.jpg" alt="Gallery" class="gallery-img">
                 </div>
             </div>
         </div>
@@ -371,7 +341,7 @@
     <!-- Footer -->
     <footer class="py-12 bg-stone-50 text-center text-stone-400 text-xs">
         <p class="font-cursive text-lg mb-2 text-stone-500">Thank You</p>
-        <p>© 2024 Yuuki & Narumi Wedding</p>
+        <p>© 2024 Yuuki & Narimi Wedding</p>
     </footer>
 
     <!-- Back to Top Button -->
