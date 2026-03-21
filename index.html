@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Parisienne&display=swap" rel="stylesheet">
+    <style>
+        html {
+            /* 項目ごとにスライド（スナップ）する設定 */
+            scroll-snap-type: y proximity;
+        }
+        body {
+            font-family: 'Noto Serif JP', serif;
+            background-color: #fdfcfb;
+        }
+        section {
+            /* スナップの対象位置をセクションの先頭に設定 */
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+        }
+        .font-cursive {
+            font-family: 'Parisienne', cursive;
+        }
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+        /* スライドショーの基本設定 */
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        /* アクティブなスライド */
+        .hero-slide.active {
+            opacity: 1;
+            animation: zoom-in 10s linear infinite;
+        }
+        /* ズームアニメーション */
+        @keyframes zoom-in {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ハンバーガーメニューのスタイル */
+        #menu-overlay {
+            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+        }
+        #menu-overlay.hidden-menu {
+            transform: translateX(100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* カスタムスクロールバー非表示 */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="text-stone-800">
+
+    <!-- Hamburger Menu Button -->
+    <button id="menu-btn" class="fixed top-6 right-6 z-50 p-2 bg-white/20 backdrop-blur-md rounded-full shadow-lg border border-white/30 focus:outline-none">
+        <div id="hamburger-icon" class="w-8 h-8 flex flex-col justify-center items-center gap-1.5 transition-all">
+            <span class="block w-6 h-0.5 bg-stone-800 transition-all origin-center"></span>
+            <span class="block w-6 h-0.5 bg-stone-800 transition-all"></span>
+            <span class="block w-6 h-0.5 bg-stone-800 transition-all origin-center"></span>
+        </div>
+    </button>
+
+    <!-- Navigation Overlay -->
+    <nav id="menu-overlay" class="fixed inset-0 z-40 bg-white/95 backdrop-blur-lg flex flex-col items-center justify-center hidden-menu">
+        <ul class="text-center space-y-8">
+            <li><a href="#hero" class="menu-link text-2xl tracking-widest font-cursive">Home</a></li>
+            <li><a href="#greeting" class="menu-link text-xl tracking-widest font-bold text-stone-600">Greeting</a></li>
+            <li><a href="#profile" class="menu-link text-xl tracking-widest font-bold text-stone-600">Profile</a></li>
+            <li><a href="#details" class="menu-link text-xl tracking-widest font-bold text-stone-600">Details</a></li>
+            <li><a href="#gallery" class="menu-link text-xl tracking-widest font-bold text-stone-600">Pre-wedding Gallery</a></li>
+            <li><a href="#rsvp" class="menu-link text-xl tracking-widest font-bold text-stone-600">RSVP</a></li>
+        </ul>
+        <div class="mt-12">
+            <p class="font-cursive text-stone-400">Tarou & Hanako</p>
+        </div>
+    </nav>
+
+    <!-- Hero Section (前撮りのベストショット3枚をスライドショーに) -->
+    <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden bg-black">
+        <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop');"></div>
+        <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop');"></div>
+
+        <div class="absolute inset-0 hero-overlay"></div>
+        
+        <div class="relative text-center text-white p-6 z-20">
+            <h2 class="font-cursive text-5xl md:text-7xl mb-4">Happy Wedding</h2>
+            <div class="text-xl md:text-2xl tracking-widest mb-8 uppercase">
+                Tarou & Hanako
+            </div>
+            <div class="border-t border-b border-white py-2 inline-block px-8 tracking-widest text-lg">
+                2026.11.22 SUN
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white z-20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </section>
+
+    <!-- Greeting Section -->
+    <section id="greeting" class="min-h-screen flex flex-col justify-center py-20 px-6 max-w-2xl mx-auto text-center reveal">
+        <h3 class="text-2xl mb-10 tracking-[0.2em] text-stone-600 font-bold uppercase border-b border-stone-100 pb-4">Greeting</h3>
+        <p class="leading-relaxed mb-6">
+            謹啓<br><br>
+            秋の気配が深まる今日この頃<br>
+            皆様におかれましては 益々ご清祥のこととお慶び申し上げます
+        </p>
+        <p class="leading-relaxed mb-6">
+            この度 私たちは結婚の運びとなり<br>
+            日頃お世話になっている皆様をお招きして<br>
+            ささやかな披露宴を催したく存じます
+        </p>
+        <p class="leading-relaxed mb-10">
+            ご多用中 誠に恐縮ではございますが<br>
+            ぜひご出席くださいますよう ご案内申し上げます
+        </p>
+        <p class="text-sm text-stone-500 font-bold">
+            2026年吉日<br>
+            新郎 苗字 太郎<br>
+            新婦 苗字 花子
+        </p>
+    </section>
+
+    <!-- Profile Section (前撮りのポートレートを使用) -->
+    <section id="profile" class="min-h-screen bg-stone-100 flex flex-col justify-center py-20 px-6 reveal">
+        <div class="max-w-4xl mx-auto w-full">
+            <h3 class="text-center text-2xl mb-16 tracking-[0.2em] text-stone-600 font-cursive uppercase">Groom & Bride</h3>
+            
+            <div class="grid md:grid-cols-2 gap-12 md:gap-24">
+                <!-- Groom -->
+                <div class="text-center">
+                    <div class="w-48 h-48 mx-auto rounded-full overflow-hidden mb-6 shadow-lg border-4 border-white">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop" alt="Groom" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-xl font-bold mb-2 uppercase tracking-widest">Tarou</h4>
+                    <p class="text-sm text-stone-500 mb-4 tracking-tighter italic">1998.05.10 / O-type</p>
+                    <p class="text-sm leading-relaxed text-stone-600 px-4">趣味はキャンプとカメラ。最近は二人の日常をVlogにするのにはまっています。皆様と楽しい時間を過ごせるのを楽しみにしています。</p>
+                </div>
+
+                <!-- Bride -->
+                <div class="text-center">
+                    <div class="w-48 h-48 mx-auto rounded-full overflow-hidden mb-6 shadow-lg border-4 border-white">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop" alt="Bride" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-xl font-bold mb-2 uppercase tracking-widest">Hanako</h4>
+                    <p class="text-sm text-stone-500 mb-4 tracking-tighter italic">2000.12.24 / A-type</p>
+                    <p class="text-sm leading-relaxed text-stone-600 px-4">趣味はカフェ巡りと料理。美味しいものを食べている時が一番幸せです。温かい家庭を築いていきたいと思っています。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Details Section -->
+    <section id="details" class="min-h-screen bg-white flex flex-col justify-center py-20 px-6 reveal">
+        <div class="max-w-4xl mx-auto w-full">
+            <h3 class="text-center text-2xl mb-12 tracking-[0.2em] text-stone-600 font-cursive uppercase">Event Details</h3>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div>
+                        <h4 class="font-bold border-l-2 border-stone-400 pl-4 mb-2 uppercase tracking-wider">Time</h4>
+                        <p>2026年11月22日（日曜日）</p>
+                        <p>受付開始 11:30</p>
+                        <p>挙式開始 12:00</p>
+                        <p>披露宴開始 13:00</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold border-l-2 border-stone-400 pl-4 mb-2 uppercase tracking-wider">Place</h4>
+                        <p>グランドプレイス ホテル & レストラン</p>
+                        <p class="text-sm text-stone-600">東京都千代田区〇〇 1-2-3</p>
+                        <p class="text-sm text-stone-600">TEL: 03-0000-0000</p>
+                    </div>
+                </div>
+
+                <!-- 会場の外観写真や地図へのプレースホルダー -->
+                <div class="bg-stone-100 rounded-lg overflow-hidden h-64 flex items-center justify-center text-stone-400">
+                    <div class="text-center p-4">
+                        <svg class="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <p class="text-xs text-center">会場の地図や外観写真を配置</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pre-wedding Photo Gallery (前撮りギャラリー) -->
+    <section id="gallery" class="min-h-screen flex flex-col justify-center py-20 px-4 bg-stone-50 reveal">
+        <div class="max-w-6xl mx-auto w-full">
+            <h3 class="text-center text-2xl mb-4 tracking-[0.2em] text-stone-600 font-cursive uppercase">Pre-wedding Gallery</h3>
+            <p class="text-center text-stone-400 text-xs tracking-widest mb-12 uppercase italic">Captured Moments</p>
+            
+            <!-- タイル状に配置。縦長・横長の写真を混ぜても映える構成 -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="col-span-2 row-span-2">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop" alt="Gallery 1" class="w-full h-full object-cover rounded shadow-sm hover:opacity-90 transition min-h-[300px]">
+                </div>
+                <div class="col-span-1">
+                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1974&auto=format&fit=crop" alt="Gallery 2" class="w-full h-48 md:h-60 object-cover rounded shadow-sm hover:opacity-90 transition">
+                </div>
+                <div class="col-span-1">
+                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop" alt="Gallery 3" class="w-full h-48 md:h-60 object-cover rounded shadow-sm hover:opacity-90 transition">
+                </div>
+                <div class="col-span-2">
+                    <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=2070&auto=format&fit=crop" alt="Gallery 4" class="w-full h-48 md:h-60 object-cover rounded shadow-sm hover:opacity-90 transition">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section id="rsvp" class="min-h-screen flex flex-col justify-center py-20 px-6 bg-white reveal">
+        <div class="max-w-xl mx-auto w-full border border-stone-200 p-8 md:p-12 rounded-xl shadow-lg">
+            <h3 class="text-center text-2xl mb-8 tracking-[0.2em] text-stone-600 uppercase">RSVP</h3>
+            <p class="text-center text-sm mb-10 text-stone-500">お手数ですが 2026年10月20日（月）までに<br>ご回答をお願い申し上げます</p>
+            
+            <form id="rsvpForm" class="space-y-6">
+                <div class="flex justify-center space-x-8 mb-8">
+                    <label class="flex items-center space-x-2 cursor-pointer group">
+                        <input type="radio" name="attendance" value="出席" class="w-5 h-5 accent-stone-600" required>
+                        <span class="text-lg group-hover:text-stone-600">ご出席</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer group">
+                        <input type="radio" name="attendance" value="欠席" class="w-5 h-5 accent-stone-600">
+                        <span class="text-lg group-hover:text-stone-600">ご欠席</span>
+                    </label>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-1">お名前（フルネーム）</label>
+                    <input type="text" name="name" required class="w-full border-b border-stone-300 py-2 focus:outline-none focus:border-stone-600 bg-transparent">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-1">ご住所</label>
+                    <input type="text" name="address" class="w-full border-b border-stone-300 py-2 focus:outline-none focus:border-stone-600 bg-transparent">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-1">メッセージ / アレルギー等</label>
+                    <textarea name="message" rows="3" class="w-full border border-stone-200 p-2 rounded focus:outline-none focus:border-stone-600 bg-stone-50"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-stone-800 text-white py-4 rounded hover:bg-stone-700 transition duration-300 tracking-widest uppercase">
+                    Confirm
+                </button>
+            </form>
+            
+            <div id="successMessage" class="hidden text-center py-10">
+                <div class="text-4xl mb-4">🕊️</div>
+                <h4 class="text-xl font-bold mb-2">ご回答ありがとうございます</h4>
+                <p class="text-stone-600">内容を送信いたしました。<br>当日お会いできるのを楽しみにしております。</p>
+                <button onclick="location.reload()" class="mt-6 text-sm text-stone-400 underline">入力をやり直す</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-stone-50 text-center text-stone-400 text-xs scroll-snap-align-end">
+        <p class="font-cursive text-lg mb-2">Thank You</p>
+        <p>&copy; 2026 Tarou & Hanako Wedding</p>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-6 right-6 z-50 bg-stone-800/80 text-white p-3 rounded-full opacity-0 transition-opacity duration-300 hover:bg-stone-700 focus:outline-none shadow-lg">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+    </button>
+
+    <script>
+        // スライドショーの制御
+        function startSlideshow() {
+            const slides = document.querySelectorAll('.hero-slide');
+            let currentSlide = 0;
+
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // ハンバーガーメニューの制御
+        const menuBtn = document.getElementById('menu-btn');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const menuLinks = document.querySelectorAll('.menu-link');
+
+        function toggleMenu() {
+            menuOverlay.classList.toggle('hidden-menu');
+            
+            // アイコンのアニメーション (X印への切り替え)
+            const spans = hamburgerIcon.querySelectorAll('span');
+            if (!menuOverlay.classList.contains('hidden-menu')) {
+                spans[0].style.transform = 'translateY(8px) rotate(45deg)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+            } else {
+                spans[0].style.transform = 'translateY(0) rotate(0)';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'translateY(0) rotate(0)';
+            }
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        
+        // リンククリック時にメニューを閉じる
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (!menuOverlay.classList.contains('hidden-menu')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // フォーム処理
+        const form = document.getElementById('rsvpForm');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            form.classList.add('opacity-0');
+            setTimeout(() => {
+                form.style.display = 'none';
+                successMessage.classList.remove('hidden');
+                successMessage.classList.add('fade-in', 'visible');
+            }, 300);
+        });
+
+        // スクロール時のフェードインアニメーション
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // 「上に戻る」ボタンの制御
+        const backToTopBtn = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.style.opacity = '1';
+            } else {
+                backToTopBtn.style.opacity = '0';
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        window.addEventListener('DOMContentLoaded', startSlideshow);
+    </script>
+</body>
+</html>
