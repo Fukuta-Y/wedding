@@ -12,7 +12,7 @@
         .font-cursive { font-family: 'Parisienne', cursive; }
         .keep-all { word-break: keep-all; overflow-wrap: break-word; }
 
-        /* --- 🌸 オープニング演出 (花盛り) --- */
+        /* --- 🌸 オープニング演出 --- */
         #loading-overlay {
             position: fixed; inset: 0; background: white; z-index: 9999;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -123,14 +123,23 @@
         </div>
     </section>
 
-    <section id="greeting" class="min-h-screen flex flex-col justify-center py-24 px-8 max-w-2xl mx-auto text-center relative keep-all reveal-up">
+　　<section id="greeting" class="min-h-screen flex flex-col justify-center py-24 px-8 max-w-2xl mx-auto text-center relative keep-all reveal-up">
         <h3 class="text-2xl mb-10 tracking-[0.2em] text-stone-600 font-bold uppercase border-b border-stone-100 pb-4">Greeting</h3>
         <div class="space-y-8 leading-loose text-stone-600">
             <p>謹啓　新涼の候　皆様には益々ご清祥のこととお慶び申し上げます</p>
             <p>この度　私たちは令和5年12月8日に入籍し<br>結婚式を挙げる運びとなりました</p>
             <p>つきましては末永くご指導ご芳情を賜りますよう<br>お願いかたがた披露の小宴を催したいと存じます</p>
             <p>ご多用のところ恐れ入りますが<br>何卒ご出席くださいますようご案内申し上げます</p>
-            <p class="mt-12 text-sm text-stone-500 font-bold">令和6年8月吉日<br>福田 裕樹 ・ 也実</p>
+            <div class="mt-12 text-sm text-stone-500 font-bold flex flex-col items-center space-y-2 md:flex-row md:justify-center md:space-y-0 md:space-x-6">
+                <span>令和6年8月吉日</span>
+                <div class="flex items-start">
+                    <span>福田</span>
+                    <div class="flex flex-col text-left ml-2">
+                        <span>裕樹</span>
+                        <span>也実</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -319,10 +328,10 @@
             
             if (attendance === '出席') {
                 successIcon.innerText = '🕊️';
-                successText.innerHTML = 'ご出席のご連絡を承りました。<br>当日お会いできるのを楽しみにしております。';
+                successText.innerHTML = 'ご出席のご連絡を承りました<br>当日お会いできるのを楽しみにしております';
             } else {
                 successIcon.innerText = '✉️';
-                successText.innerHTML = 'ご欠席のご連絡を承りました。<br>ご回答ありがとうございました。';
+                successText.innerHTML = 'ご欠席のご連絡を承りました<br>ご回答ありがとうございました';
             }
             
             successMessage.classList.remove('hidden'); 
