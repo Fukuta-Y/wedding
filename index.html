@@ -12,7 +12,7 @@
         .font-cursive { font-family: 'Parisienne', cursive; }
         .keep-all { word-break: keep-all; overflow-wrap: break-word; }
 
-        /* --- 🌸 オープニング演出 --- */
+        /* --- 🌸 オープニング演出 (花盛り) --- */
         #loading-overlay {
             position: fixed; inset: 0; background: white; z-index: 9999;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -27,25 +27,25 @@
         .loading-text-wrap { position: absolute; text-align: center; opacity: 0; animation: text-pop-in 1.8s ease-out 2.2s forwards; }
         @keyframes text-pop-in { to { opacity: 1; } }
 
-        /* --- ✨ 抽象的な浮遊アニメーション --- */
+        /* --- ✨ 背景アニメーション --- */
         .deco-ring {
             position: fixed; border: 1px solid var(--accent); border-radius: 50%; 
-            opacity: 0.1; pointer-events: none; z-index: 1;
+            opacity: 0.08; pointer-events: none; z-index: 1;
             animation: ring-rotate 25s linear infinite;
         }
         @keyframes ring-rotate {
-            0% { transform: translateY(110vh) rotate(0deg); }
-            100% { transform: translateY(-20vh) rotate(360deg); }
+            0% { transform: translateY(110vh) rotate(0deg) translateX(0); }
+            100% { transform: translateY(-20vh) rotate(360deg) translateX(30px); }
         }
         .particle {
             position: fixed; background: var(--accent); border-radius: 50%;
-            opacity: 0.2; pointer-events: none; z-index: 1;
+            opacity: 0.15; pointer-events: none; z-index: 1;
             animation: particle-rise 15s linear infinite;
         }
         @keyframes particle-rise {
-            0% { transform: translateY(110vh) scale(1); opacity: 0; }
+            0% { transform: translateY(110vh) scale(1) translateX(0); opacity: 0; }
             50% { opacity: 0.3; }
-            100% { transform: translateY(-10vh) scale(0.5); opacity: 0; }
+            100% { transform: translateY(-20vh) scale(0.5) translateX(-20px); opacity: 0; }
         }
 
         /* --- 🚀 スライドアップ設定 --- */
@@ -78,8 +78,14 @@
             <svg class="bouquet-svg" viewBox="0 0 120 120">
                 <path class="draw-path" d="M60,110 C40,90 10,70 5,40 Q0,10 30,15 T60,40" />
                 <path class="draw-path" d="M60,110 C80,90 110,70 115,40 Q120,10 90,15 T60,40" />
-                <circle class="draw-path" cx="60" cy="45" r="12" />
-                <path class="draw-path" d="M60,110 L60,70" />
+                <circle class="draw-path" cx="60" cy="45" r="14" style="animation-delay: 0.1s;" />
+                <path class="draw-path" d="M60,32 Q65,40 60,45 Q55,40 60,32" style="animation-delay: 0.2s;" />
+                <circle class="draw-path" cx="42" cy="58" r="10" style="animation-delay: 0.3s;" />
+                <circle class="draw-path" cx="78" cy="58" r="10" style="animation-delay: 0.4s;" />
+                <circle class="draw-path" cx="50" cy="70" r="6" style="animation-delay: 0.5s;" />
+                <circle class="draw-path" cx="70" cy="70" r="6" style="animation-delay: 0.6s;" />
+                <path class="draw-path" d="M60,110 L60,70" style="animation-delay: 0.8s;" />
+                <path class="draw-path" d="M50,85 Q60,75 70,85 L60,95 Z" style="animation-delay: 0.9s;" />
             </svg>
             <div class="loading-text-wrap">
                 <h1 class="font-cursive text-4xl text-stone-600">Yuuki & Narimi</h1>
@@ -113,7 +119,7 @@
         <div class="relative text-center text-white z-20 reveal-up active">
             <h2 class="font-cursive text-6xl md:text-8xl mb-4">Happy Wedding</h2>
             <p class="tracking-[0.4em] text-sm uppercase">YUUKI & NARIMI</p>
-            <div class="mt-10 border-y border-white/40 py-2 inline-block px-12 text-lg">2024.10.26 SAT</div>
+            <div class="mt-10 border-y border-white/40 py-2 inline-block px-12 text-lg font-bold uppercase">2024.10.26 SAT</div>
         </div>
     </section>
 
@@ -124,7 +130,7 @@
             <p>この度　私たちは令和5年12月8日に入籍し<br>結婚式を挙げる運びとなりました</p>
             <p>つきましては末永くご指導ご芳情を賜りますよう<br>お願いかたがた披露の小宴を催したいと存じます</p>
             <p>ご多用のところ恐れ入りますが<br>何卒ご出席くださいますようご案内申し上げます</p>
-            <p class="mt-12 text-sm text-stone-500 font-bold">令和6年8月吉日<br>福田 裕樹 ・ 也実</p>
+            <p class="mt-12 text-sm text-stone-500 font-bold font-bold">令和6年8月吉日<br>福田 裕樹 ・ 也実</p>
         </div>
     </section>
 
@@ -161,11 +167,11 @@
         </div>
     </section>
 
-    <section id="details" class="min-h-screen bg-white py-24 px-8">
+    <section id="details" class="min-h-screen bg-white py-24 px-8 reveal-up">
         <div class="max-w-4xl mx-auto w-full">
             <h3 class="text-center text-3xl mb-12 tracking-[0.2em] text-stone-600 font-cursive uppercase reveal-up">Event Details</h3>
             <div class="grid md:grid-cols-2 gap-12">
-                <div class="space-y-8 keep-all reveal-up delay-100">
+                <div class="space-y-8 keep-all reveal-up delay-100 text-left">
                     <div>
                         <h4 class="font-bold border-l-2 border-stone-400 pl-4 mb-3 uppercase tracking-wider text-stone-600">Date</h4>
                         <p>令和6年10月26日（土曜日）</p>
@@ -181,7 +187,7 @@
                     <div>
                         <h4 class="font-bold border-l-2 border-stone-400 pl-4 mb-3 uppercase tracking-wider text-stone-600">Place</h4>
                         <p class="text-lg font-bold">KKRホテル大阪</p>
-                        <p class="text-stone-500 italic">（2階 星華の間）</p>
+                        <p class="text-stone-500">（2階 星華の間）</p>
                         <p class="text-sm text-stone-600 mt-2">大阪市中央区馬場町2番24号</p>
                     </div>
                 </div>
@@ -208,7 +214,7 @@
 
     <section id="rsvp" class="min-h-screen py-24 px-6 bg-white relative">
         <div class="max-w-xl mx-auto border border-stone-200 p-8 md:p-12 rounded-xl shadow-lg bg-white reveal-up relative z-10">
-            <h3 class="text-center text-2xl mb-8 tracking-[0.2em] text-stone-600 uppercase">RSVP</h3>
+            <h3 class="text-center text-2xl mb-8 tracking-[0.2em] text-stone-600 uppercase reveal-up">RSVP</h3>
             <p class="text-center text-sm mb-10 text-stone-500 font-bold underline decoration-stone-200 underline-offset-8 keep-all reveal-up delay-100">お手数ながらご都合の程を 令和6年9月24日迄に<br>ご一報お願い申し上げます</p>
             <form id="rsvpForm" class="space-y-6">
                 <div class="flex justify-center space-x-8 mb-8 reveal-up delay-200">
@@ -230,11 +236,11 @@
     </section>
 
     <footer class="py-24 text-center text-stone-300 relative z-10">
-        <p class="font-cursive text-3xl mb-4 text-stone-400 reveal-up">Thank You</p>
+        <p class="font-cursive text-3xl mb-3 text-stone-400 reveal-up">Thank You</p>
         <p class="text-[10px] tracking-[0.4em] uppercase reveal-up delay-100 block">© 2024 Yuuki & Narimi Wedding</p>
     </footer>
 
-    <button id="backToTop" class="fixed bottom-8 right-8 z-[1100] bg-stone-800/90 text-white p-4 rounded-full shadow-2xl opacity-0 translate-y-10 transition-all duration-500">
+    <button id="backToTop" class="fixed bottom-8 right-8 z-[1100] bg-stone-800/90 text-white p-4 rounded-full shadow-2xl opacity-0 translate-y-10 transition-all duration-500 hover:scale-110">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path></svg>
     </button>
 
@@ -243,25 +249,26 @@
             const container = document.getElementById('deco-container');
             if (!container) return;
             container.innerHTML = '';
-            for (let i = 0; i < 8; i++) {
+            for (let i = 0; i < 15; i++) {
                 const ring = document.createElement('div');
                 ring.className = 'deco-ring';
-                const size = Math.random() * 80 + 40;
+                const size = Math.random() * 90 + 30;
                 ring.style.width = size + 'px';
                 ring.style.height = size + 'px';
                 ring.style.left = Math.random() * 95 + '%';
-                ring.style.animationDelay = Math.random() * 10 + 's';
-                ring.style.animationDuration = (Math.random() * 15 + 20) + 's';
+                ring.style.animationDelay = Math.random() * 12 + 's';
+                ring.style.animationDuration = (Math.random() * 15 + 18) + 's';
                 container.appendChild(ring);
             }
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 30; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
-                const size = Math.random() * 4 + 2;
+                const size = Math.random() * 5 + 2;
                 particle.style.width = size + 'px';
                 particle.style.height = size + 'px';
                 particle.style.left = Math.random() * 95 + '%';
                 particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 8 + 10) + 's';
                 container.appendChild(particle);
             }
         };
@@ -271,6 +278,7 @@
         
         function startSlideshow() {
             const slides = document.querySelectorAll('.hero-slide');
+            if(slides.length === 0) return;
             let idx = 0;
             setInterval(() => {
                 slides[idx].classList.remove('active');
@@ -299,11 +307,7 @@
 
         const form = document.getElementById('rsvpForm');
         const successMessage = document.getElementById('successMessage');
-        form.onsubmit = (e) => {
-            e.preventDefault(); 
-            form.style.display = 'none';
-            successMessage.classList.remove('hidden');
-        };
+        form.onsubmit = (e) => { e.preventDefault(); form.style.display = 'none'; successMessage.classList.remove('hidden'); };
     </script>
 </body>
 </html>
