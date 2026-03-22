@@ -12,7 +12,7 @@
         .font-cursive { font-family: 'Parisienne', cursive; }
         .keep-all { word-break: keep-all; overflow-wrap: break-word; }
 
-        /* --- 🌸 オープニング演出 --- */
+        /* --- 🌸 オープニング演出 (花盛り) --- */
         #loading-overlay {
             position: fixed; inset: 0; background: white; z-index: 9999;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -27,7 +27,7 @@
         .loading-text-wrap { position: absolute; text-align: center; opacity: 0; animation: text-pop-in 1.8s ease-out 2.2s forwards; }
         @keyframes text-pop-in { to { opacity: 1; } }
 
-        /* --- ✨ 背景演出 --- */
+        /* --- ✨ 背景アニメーション --- */
         .deco-ring {
             position: fixed; border: 1px solid var(--accent); border-radius: 50%; 
             opacity: 0.08; pointer-events: none; z-index: 1;
@@ -48,7 +48,7 @@
             100% { transform: translateY(-20vh) scale(0.5) translateX(-20px); opacity: 0; }
         }
 
-        /* --- 🚀 アニメーション設定 --- */
+        /* --- 🚀 スライドアップ設定 --- */
         .reveal-up { 
             opacity: 0; 
             transform: translateY(50px); 
@@ -130,7 +130,7 @@
             <p>この度　私たちは令和5年12月8日に入籍し<br>結婚式を挙げる運びとなりました</p>
             <p>つきましては末永くご指導ご芳情を賜りますよう<br>お願いかたがた披露の小宴を催したいと存じます</p>
             <p>ご多用のところ恐れ入りますが<br>何卒ご出席くださいますようご案内申し上げます</p>
-            <p class="mt-12 text-sm text-stone-500 font-bold">令和6年8月吉日<br>福田 裕樹 ・ 也実</p>
+            <p class="mt-12 text-sm text-stone-500 font-bold font-bold">令和6年8月吉日<br>福田 裕樹 ・ 也実</p>
         </div>
     </section>
 
@@ -220,44 +220,14 @@
             </p>
             <form id="rsvpForm" class="space-y-6">
                 <div class="flex justify-center space-x-8 mb-8 reveal-up delay-200">
-                    <label class="flex items-center space-x-2 cursor-pointer group">
-                        <input type="radio" name="attendance" value="出席" class="w-5 h-5 accent-stone-700" required checked>
-                        <span class="text-lg group-hover:text-stone-600">ご出席</span>
-                    </label>
-                    <label class="flex items-center space-x-2 cursor-pointer group">
-                        <input type="radio" name="attendance" value="欠席" class="w-5 h-5 accent-stone-700">
-                        <span class="text-lg group-hover:text-stone-600">ご欠席</span>
-                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="attendance" value="出席" class="w-5 h-5 accent-stone-700" required><span class="text-lg group-hover:text-stone-600">ご出席</span></label>
+                    <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="attendance" value="欠席" class="w-5 h-5 accent-stone-700"><span class="text-lg group-hover:text-stone-600">ご欠席</span></label>
                 </div>
-
-                <div class="reveal-up">
-                    <label class="block text-sm font-medium mb-1">お名前（フルネーム）</label>
-                    <input type="text" name="name" required class="w-full border-b border-stone-300 py-2 focus:outline-none focus:border-stone-600 bg-transparent transition">
-                </div>
-
-                <div class="reveal-up">
-                    <label class="block text-sm font-medium mb-1">メールアドレス</label>
-                    <input type="email" name="email" required placeholder="example@mail.com" class="w-full border-b border-stone-300 py-2 focus:outline-none focus:border-stone-600 bg-transparent transition">
-                </div>
-
-                <div class="reveal-up">
-                    <label class="block text-sm font-medium mb-1">ご住所</label>
-                    <input type="text" name="address" class="w-full border-b border-stone-300 py-2 focus:outline-none focus:border-stone-600 bg-transparent transition">
-                </div>
-
-                <div id="absent-fields" class="hidden space-y-2 reveal-up">
-                    <label class="block text-sm font-medium text-stone-500">欠席のメッセージ（もしよろしければご記入ください）</label>
-                    <textarea name="absent_message" rows="2" placeholder="あいにく先約があり…等" class="w-full border border-stone-200 p-2 rounded focus:outline-none focus:border-stone-600 bg-stone-50/50 transition"></textarea>
-                </div>
-
-                <div class="reveal-up">
-                    <label class="block text-sm font-medium mb-1">メッセージ / アレルギー等</label>
-                    <textarea name="message" rows="3" class="w-full border border-stone-200 p-2 rounded focus:outline-none focus:border-stone-600 bg-stone-50 transition"></textarea>
-                </div>
-
+                <div class="reveal-up"><label class="block text-sm font-medium mb-1">お名前（フルネーム）</label><input type="text" name="name" required class="w-full border-b border-stone-300 py-2 focus:outline-none focus:border-stone-600 bg-transparent transition"></div>
+                <div class="reveal-up"><label class="block text-sm font-medium mb-1">ご住所</label><input type="text" name="address" class="w-full border-b border-stone-300 py-2 focus:outline-none focus:border-stone-600 bg-transparent transition"></div>
+                <div class="reveal-up"><label class="block text-sm font-medium mb-1">メッセージ / アレルギー等</label><textarea name="message" rows="3" class="w-full border border-stone-200 p-2 rounded focus:outline-none focus:border-stone-600 bg-stone-50 transition"></textarea></div>
                 <button type="submit" class="w-full bg-stone-800 text-white py-4 rounded hover:bg-black transition shadow-xl font-bold reveal-up">CONFIRM</button>
             </form>
-
             <div id="successMessage" class="hidden text-center py-10">
                 <div class="text-4xl mb-4">🕊️</div>
                 <h4 class="text-xl font-bold mb-2">ご回答ありがとうございます</h4>
@@ -337,26 +307,9 @@
         menuBtn.onclick = () => overlay.classList.toggle('hidden-menu');
         document.querySelectorAll('.menu-link').forEach(l => l.onclick = () => overlay.classList.add('hidden-menu'));
 
-        // 出欠切り替え制御
-        const attendanceRadios = document.querySelectorAll('input[name="attendance"]');
-        const absentFields = document.getElementById('absent-fields');
-        attendanceRadios.forEach(radio => {
-            radio.addEventListener('change', (e) => {
-                if (e.target.value === '欠席') {
-                    absentFields.classList.remove('hidden');
-                } else {
-                    absentFields.classList.add('hidden');
-                }
-            });
-        });
-
         const form = document.getElementById('rsvpForm');
         const successMessage = document.getElementById('successMessage');
-        form.onsubmit = (e) => { 
-            e.preventDefault(); 
-            form.style.display = 'none'; 
-            successMessage.classList.remove('hidden'); 
-        };
+        form.onsubmit = (e) => { e.preventDefault(); form.style.display = 'none'; successMessage.classList.remove('hidden'); };
     </script>
 </body>
 </html>
