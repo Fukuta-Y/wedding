@@ -130,7 +130,7 @@
             <p>この度　私たちは令和5年12月8日に入籍し<br>結婚式を挙げる運びとなりました</p>
             <p>つきましては末永くご指導ご芳情を賜りますよう<br>お願いかたがた披露の小宴を催したいと存じます</p>
             <p>ご多用のところ恐れ入りますが<br>何卒ご出席くださいますようご案内申し上げます</p>
-            <p class="mt-12 text-sm text-stone-500 font-bold font-bold">令和6年8月吉日<br>福田 裕樹 ・ 也実</p>
+            <p class="mt-12 text-sm text-stone-500 font-bold">令和6年8月吉日<br>福田 裕樹 ・ 也実</p>
         </div>
     </section>
 
@@ -224,14 +224,14 @@
                     <label class="flex items-center space-x-2 cursor-pointer group"><input type="radio" name="attendance" value="欠席" class="w-5 h-5 accent-stone-700"><span class="text-lg group-hover:text-stone-600">ご欠席</span></label>
                 </div>
                 <div class="reveal-up"><label class="block text-sm font-medium mb-1">お名前（フルネーム）</label><input type="text" name="name" required class="w-full border-b border-stone-300 py-2 focus:outline-none focus:border-stone-600 bg-transparent transition"></div>
-                <div class="reveal-up"><label class="block text-sm font-medium mb-1">ご住所</label><input type="text" name="address" class="w-full border-b border-stone-300 py-2 focus:outline-none focus:border-stone-600 bg-transparent transition"></div>
+                <div class="reveal-up"><label class="block text-sm font-medium mb-1">メールアドレス</label><input type="email" name="email" required class="w-full border-b border-stone-300 py-2 focus:outline-none focus:border-stone-600 bg-transparent transition"></div>
                 <div class="reveal-up"><label class="block text-sm font-medium mb-1">メッセージ / アレルギー等</label><textarea name="message" rows="3" class="w-full border border-stone-200 p-2 rounded focus:outline-none focus:border-stone-600 bg-stone-50 transition"></textarea></div>
                 <button type="submit" class="w-full bg-stone-800 text-white py-4 rounded hover:bg-black transition shadow-xl font-bold reveal-up">CONFIRM</button>
             </form>
             <div id="successMessage" class="hidden text-center py-10">
-                <div class="text-4xl mb-4">🕊️</div>
-                <h4 class="text-xl font-bold mb-2">ご回答ありがとうございます</h4>
-                <p class="text-stone-600">内容を送信いたしました。<br>当日お会いできるのを楽しみにしております。</p>
+                <div id="successIcon" class="text-4xl mb-4">🕊️</div>
+                <h4 class="text-xl font-bold mb-2">ご回答ありがとうございました</h4>
+                <p id="successText" class="text-stone-600"></p>
                 <button onclick="location.reload()" class="mt-6 text-sm text-stone-400 underline">入力をやり直す</button>
             </div>
         </div>
@@ -309,7 +309,24 @@
 
         const form = document.getElementById('rsvpForm');
         const successMessage = document.getElementById('successMessage');
-        form.onsubmit = (e) => { e.preventDefault(); form.style.display = 'none'; successMessage.classList.remove('hidden'); };
+        const successText = document.getElementById('successText');
+        const successIcon = document.getElementById('successIcon');
+
+        form.onsubmit = (e) => { 
+            e.preventDefault(); 
+            const attendance = form.attendance.value;
+            form.style.display = 'none'; 
+            
+            if (attendance === '出席') {
+                successIcon.innerText = '🕊️';
+                successText.innerHTML = 'ご出席のご連絡を承りました。<br>当日お会いできるのを楽しみにしております。';
+            } else {
+                successIcon.innerText = '✉️';
+                successText.innerHTML = 'ご欠席のご連絡を承りました。<br>ご回答ありがとうございました。';
+            }
+            
+            successMessage.classList.remove('hidden'); 
+        };
     </script>
 </body>
 </html>
